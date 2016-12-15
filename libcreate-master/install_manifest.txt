@@ -1,0 +1,7 @@
+/usr/local/lib/libcreate.a
+/usr/local/include/create/create.h
+/usr/local/include/create/serial.h
+/usr/local/include/create/types.h
+/usr/local/include/create/data.h
+/usr/local/include/create/packet.h
+/usr/local/include/create/util.h

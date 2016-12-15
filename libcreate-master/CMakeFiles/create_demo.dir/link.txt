@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/create_demo.dir/examples/create_demo.cpp.o  -o create_demo -rdynamic -lboost_system-mt -lboost_thread-mt libcreate.a -lpthread -lboost_system-mt -lboost_thread-mt 

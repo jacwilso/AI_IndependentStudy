@@ -1,0 +1,2 @@
+/usr/bin/ar cr libcreate.a  CMakeFiles/create.dir/src/create.cpp.o CMakeFiles/create.dir/src/serial.cpp.o CMakeFiles/create.dir/src/serial_stream.cpp.o CMakeFiles/create.dir/src/serial_query.cpp.o CMakeFiles/create.dir/src/data.cpp.o CMakeFiles/create.dir/src/packet.cpp.o CMakeFiles/create.dir/src/types.cpp.o
+/usr/bin/ranlib libcreate.a
