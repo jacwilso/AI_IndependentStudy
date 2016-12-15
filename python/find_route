@@ -5,7 +5,7 @@ from Search import Search
 
 # Usage for user error #
 def usage(): 
-  print "[USAGE]: ./find_route mtxFile pointFile start end searchType\n searchTypes:\n Breadth-First Seach: breadth, breadth-first, BFS\n Depth-First Search: depth, depth-first, DFS\n Uniform Search: uniform, U, UNIFORM"
+  print "[USAGE]: ./find_route points_file adjacencyMatrix_file searchType start end\n searchTypes:\n Breadth-First Seach: breadth, breadth-first, BFS\n Depth-First Search: depth, depth-first, DFS\n Uniform Search: uniform, U, UNIFORM"
 
 if __name__ == '__main__':
   if len(sys.argv) != 6:

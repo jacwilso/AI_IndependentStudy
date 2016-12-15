@@ -60,12 +60,15 @@ class Search:
     frontier.put(curr) 
     while not frontier.empty(): # if the frontier empty their is no path to the goal node
       curr = frontier.get() # get the top path from the frontier
-      #print "PATH", curr
+      ''' # DEBUG 1
+      print "PATH", curr
+      # DEBUG 1 '''
       explored.add(curr[-1]) # add the last point in current path to explored
-      # THIS LINE ESTABLISHES WHICH NODE IS THE GOAL -->
       if curr[-1] == self.end: # if the last point in the path is the goal, the algorithm should return the path
         return curr 
-      #print "ADJ", adjList[curr[-1]]
+      ''' # DEBUG 2
+      print "ADJ", adjList[curr[-1]]
+      # DEBUG 2 '''
       # For each adjacency of the last node in the path, so long as the next node isn't visited:
       for i in adjList[curr[-1]]:
         if i not in explored:
@@ -73,8 +76,10 @@ class Search:
           frontier.put( copy.deepcopy(curr) ) # add a deep copy of the path to the frontier
           explored.add( i ) # add the node to explored
           curr.remove( i ) # remove the node from the path, and check the remaining adjacencies
-      #print "FRONTIER ", list(frontier.queue)
-      #print "EXPLORED ", explored
+      ''' # DEBUG 3
+      print "FRONTIER ", list(frontier.queue)
+      print "EXPLORED ", explored
+      # DEBUG 3 '''
     # If frontier is empty, their is no path from the self.start to the goal, return an empty path
     curr = {}
     return curr
@@ -89,19 +94,25 @@ class Search:
     frontier.append(curr)
     while frontier:
       curr = frontier.pop() # use the frontier as a stack
-      #print "PATH", curr
+      ''' # DEBUG 1
+      print "PATH", curr
+      # DEBUG 1 '''
       explored.add(curr[-1])
       if curr[-1] == self.end: 
         return curr
-      #print "ADJ", adjList[curr[-1]]
+      ''' # DEBUG 2
+      print "ADJ", adjList[curr[-1]]
+      # DEBUG 2 '''
       for i in reversed(adjList[curr[-1]]):
         if i not in explored:
           curr.append( i )
           frontier.append( copy.deepcopy(curr) )
           explored.add( i )
           curr.remove( i )
-      #print "FRONTIER ", frontier 
-      #print "EXPLORED ", explored
+      ''' # DEBUG 3
+      print "FRONTIER ", list(frontier.queue)
+      print "EXPLORED ", explored
+      # DEBUG 3 '''
     curr = {}
     return curr
 
@@ -123,18 +134,24 @@ class Search:
             d += distance(points[v],points[w])
         minDist.append( copy.deepcopy(d) )
       curr = frontier.pop(minDist.index(min(minDist))) # current path is the path with the minimum distance
-      #print "PATH ", curr
+      ''' # DEBUG 1
+      print "PATH", curr
+      # DEBUG 1 '''
       explored.add(curr[-1])
       if curr[-1] == self.end:
         return curr
-      #print "ADJ", adjList[curr[-1]]
+      ''' # DEBUG 2
+      print "ADJ", adjList[curr[-1]]
+      # DEBUG 2 '''
       for i in adjList[curr[-1]]:
         if i not in explored:
           curr.append( i )
           frontier.append( copy.deepcopy(curr) )
           explored.add( i )
           curr.remove( i )
-      #print "FRONTIER ", frontier 
-      #print "EXPLORED ", explored
+      ''' # DEBUG 3
+      print "FRONTIER ", list(frontier.queue)
+      print "EXPLORED ", explored
+      # DEBUG 3 '''
     curr = {}
     return curr;
