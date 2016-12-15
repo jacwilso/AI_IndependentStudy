@@ -1,6 +1,7 @@
 #include "Search.h"
 
 Search::Search(int start, int end){
+  // set start and end points
   if(start < 0) start = 0;
   else this->start = start;
   if(end < 0) end = 0;
@@ -8,6 +9,7 @@ Search::Search(int start, int end){
 }
 
 void Search::loadFile(char* pointFile, char* adjMatrix){
+  // load points and adjacencies
   ifstream location(pointFile);
   ifstream adjMtx(adjMatrix);
 
@@ -26,11 +28,11 @@ void Search::loadFile(char* pointFile, char* adjMatrix){
     end = points.size()-1;
   }
 
-  for(int i=0; i<points.size(); i++)
+  for(unsigned int i=0; i<points.size(); i++)
     adjMtx>>c;
-  for(int i=0; i<points.size(); i++){
+  for(unsigned int i=0; i<points.size(); i++){
     adjMtx>>c;
-    for(int j=0; j<points.size(); j++){
+    for(unsigned int j=0; j<points.size(); j++){
       int k;
       adjMtx>>k;
       if(k==1)
@@ -47,25 +49,25 @@ vector<int> Search::uniform(){
   frontier.push_back(curr);
   while(!frontier.empty()){
     float min=0; int index=0;
-    for(int j=0; j<frontier[0].size()-1; j++)
+    for(unsigned int j=0; j<frontier[0].size()-1; j++)
       min += dist(points[frontier[0][j]],points[frontier[0][j+1]]);
-    for(int i=0; i<frontier.size(); i++){
+    for(unsigned int i=0; i<frontier.size(); i++){
       float d=0;
-      for(int j=0; j<frontier[i].size()-1; j++){
+      for(unsigned int j=0; j<frontier[i].size()-1; j++){
         d+=dist(points[frontier[i][j]],points[frontier[i][j+1]]);
         if(d<min)index=i;
       }
     }
     curr = frontier[index];
 /*    cout<<"PATH ";
-    for(int i=0; i<curr.size(); i++) cout<<curr[i]<<" ";
+    for(unsigned int i=0; i<curr.size(); i++) cout<<curr[i]<<" ";
     cout<<endl;*/
     explored.insert(curr.back());
     if(curr.back() == end) return curr;
     frontier.erase(frontier.begin()+index);
-    vector<int> adj=adjList[curr[curr.size()-1]];
+    vector<int> adj=adjList[curr.back()];
     //cout<<"ADJACENCIES ";
-    for(int i=0; i<adj.size(); i++){
+    for(unsigned int i=0; i<adj.size(); i++){
       if(explored.find(adj[i])==explored.end()){
         //cout<<adj[i]<<" ";
         curr.push_back(adj[i]);
@@ -94,15 +96,14 @@ vector<int> Search::breadth(){
   while(!frontier.empty()){
       curr=frontier.front();
 /*      cout<<"PATH ";
-      for(int i=0; i<curr.size(); i++) cout<<curr[i]<<" ";
+      for(unsigned int i=0; i<curr.size(); i++) cout<<curr[i]<<" ";
       cout<<endl;*/
       explored.insert(curr.back());
       if(curr.back() == end) return curr;
       frontier.pop();
-      vector<int> adj=adjList[curr[curr.size()-1]];
-
+      vector<int> adj=adjList[curr.back()];
 //      cout<<"ADJACENCIES ";
-      for(int i=0; i<adj.size(); i++){
+      for(unsigned int i=0; i<adj.size(); i++){
         if(explored.find(adj[i])==explored.end()){
 //          cout<<adj[i]<<" ";
           curr.push_back(adj[i]);
@@ -131,16 +132,16 @@ vector<int> Search::depth(){
   while(!frontier.empty()){
       curr=frontier.top();
 /*      cout<<"PATH ";
-      for(int i=0; i<curr.size(); i++) cout<<curr[i]<<" ";
+      for(unsigned int i=0; i<curr.size(); i++) cout<<curr[i]<<" ";
       cout<<endl;*/
       explored.insert(curr.back());
       if(curr.back() == end) return curr;
       frontier.pop();
-      vector<int> adj=adjList[curr[curr.size()-1]];
-//      cout<<"ADJACENCIES ";
+      vector<int> adj=adjList[curr.back()];
+      //cout<<"ADJACENCIES ";
       for(int i=adj.size()-1; i>=0; i--){
         if(explored.find(adj[i])==explored.end()){
-//          cout<<adj[i]<<" ";
+          //cout<<adj[i]<<" ";
           curr.push_back(adj[i]);
           frontier.push(curr);
           explored.insert(adj[i]);
